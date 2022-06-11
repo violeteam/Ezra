@@ -10,7 +10,6 @@ namespace Ezra.Configurations
 {
     public class Configurations
     {
-        [Serializable]
         public class Configuration
         {
             public string version { get; set; }

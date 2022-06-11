@@ -16,6 +16,15 @@ namespace Ezra
         private BackgroundWorker worker = new BackgroundWorker();
         private Configurations.Configurations.Configuration profile = new Configurations.Configurations.Configuration();
 
+        public class Variables
+        {
+            public static Popup.Ok complete = new Popup.Ok(
+                "Complete",
+                "Modules successfully completed",
+                "Some features may require a restart"
+            );
+        }
+
         public Ezra()
         {
             InitializeComponent();
@@ -100,8 +109,7 @@ namespace Ezra
                     "0",
                     Registry.CurrentUser,
                     button_remove_mouse_acceleration
-                )
-                ,
+                ),
                 new Modules.Tweaks.Module(
                     new List<string>()
                     {
@@ -114,6 +122,78 @@ namespace Ezra
                     0x00000001,
                     Registry.LocalMachine,
                     button_remove_onedrive
+                ),
+                new Modules.Tweaks.Module(
+                    new List<string>()
+                    {
+                        "SOFTWARE",
+                        "Setup",
+                        "LabConfig"
+                    },
+                    "BypassCPUCheck",
+                    0x00000001,
+                    Registry.LocalMachine,
+                    button_remove_CPU
+                ),
+                new Modules.Tweaks.Module(
+                    new List<string>()
+                    {
+                        "SOFTWARE",
+                        "Setup",
+                        "LabConfig"
+                    },
+                    "BypassDiskCheck",
+                    0x00000001,
+                    Registry.LocalMachine,
+                    button_remove_DISK
+                ),
+                new Modules.Tweaks.Module(
+                    new List<string>()
+                    {
+                        "SOFTWARE",
+                        "Setup",
+                        "LabConfig"
+                    },
+                    "BypassRAMCheck",
+                    0x00000001,
+                    Registry.LocalMachine,
+                    button_remove_RAM
+                ),
+                new Modules.Tweaks.Module(
+                    new List<string>()
+                    {
+                        "SOFTWARE",
+                        "Setup",
+                        "LabConfig"
+                    },
+                    "BypassSecureBootCheck",
+                    0x00000001,
+                    Registry.LocalMachine,
+                    button_remove_SB
+                ),
+                new Modules.Tweaks.Module(
+                    new List<string>()
+                    {
+                        "SOFTWARE",
+                        "Setup",
+                        "LabConfig"
+                    },
+                    "BypassStorageCheck",
+                    0x00000001,
+                    Registry.LocalMachine,
+                    button_remove_STORAGE
+                ),
+                new Modules.Tweaks.Module(
+                    new List<string>()
+                    {
+                        "SOFTWARE",
+                        "Setup",
+                        "LabConfig"
+                    },
+                    "BypassTPMCheck",
+                    0x00000001,
+                    Registry.LocalMachine,
+                    button_remove_TPM
                 )
             };
         }
@@ -126,8 +206,7 @@ namespace Ezra
             {
                 if (module.button.Checked == true)
                 {
-                    key = Modules.Tools.create_registry((RegistryKey)module.registry, module.requirements);
-                    Console.WriteLine($"{key} {module.key} {module.value}");
+                    key = Modules.Tools.create_registry(module.registry, module.requirements);
                     key.SetValue(module.key, module.value);
                 }
             }
@@ -137,6 +216,7 @@ namespace Ezra
         private void button_apply_Click(object sender, EventArgs e)
         {
             Manager.Threads.worker(worker);
+            Variables.complete.ShowDialog();
         }
 
         private void button_close_Click(object sender, EventArgs e)

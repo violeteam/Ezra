@@ -178,10 +178,19 @@
     <Compile Include="Manager\Ui.cs" />
     <Compile Include="Modules\Tools.cs" />
     <Compile Include="Modules\Tweaks.cs" />
+    <Compile Include="Popup\Ok.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Popup\Ok.Designer.cs">
+      <DependentUpon>Ok.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Ezra.resx">
       <DependentUpon>Ezra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popup\Ok.resx">
+      <DependentUpon>Ok.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
